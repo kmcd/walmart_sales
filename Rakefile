@@ -27,6 +27,7 @@ task :blend => :test do
   puts 'Blending'
 end
 
+# TODO: create in db instead - this doesn't belong in source repo
 task :partition do
   require_relative 'lib/walmart_sales'
   examples, number_of_partitions = Train.count, 5
