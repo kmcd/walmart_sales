@@ -1,4 +1,5 @@
 create table features(
+  id serial,
   store integer,
   date date,
   temperature decimal,
@@ -14,6 +15,7 @@ create table features(
 );
   
 create table train(
+  id serial,
   store integer,
   dept integer,
   date date,
