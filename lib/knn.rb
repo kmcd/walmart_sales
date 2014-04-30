@@ -1,0 +1,2 @@
+class Knn
+end

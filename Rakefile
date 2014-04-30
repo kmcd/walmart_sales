@@ -1,6 +1,7 @@
 require 'rake'
 require 'rake/testtask'
-
+require 'yaml'
+ 
 task :default => [:test]
 
 task :import do
@@ -24,4 +25,18 @@ end
 
 task :blend => :test do
   puts 'Blending'
+end
+
+task :partition do
+  require_relative 'lib/walmart_sales'
+  examples, number_of_partitions = Train.count, 5
+  partitions = (1..examples).
+    to_a.
+    shuffle.
+    each_slice(examples/number_of_partitions).
+    map {|_| _ }
+  
+  vault = { validation: partitions.last, training:partitions[0..-2] }
+  
+  File.open('./data/vault.yml', 'w') {|_| _.write vault.to_yaml }
 end
