@@ -1,8 +1,6 @@
 = Feature expansion
 
 HISTORICAL department sales %
-  - week on week
-  - month on month (monthy targets)
   - weeks remaining till end of month
   - year on year
   - as % of total store revenue
@@ -11,8 +9,6 @@ HISTORICAL department sales %
   - as % company size
   
 HISTORICAL department sales % / stdev (consistency)
-  - week on week
-  - month on month (monthy targets)
   - weeks remaining till end of month
   - year on year
   - as % of total store revenue
@@ -28,3 +24,5 @@ Holiday type (xmas, labour day, thanksgiving)
   - department sales % relative to all previous holidays
   - department store % relative to all previous holidays
   - department company % relative to all previous holidays
+  
+Markdown 1 - 5

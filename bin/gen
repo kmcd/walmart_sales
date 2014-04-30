@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+# USAGE: gen [-f] [feature name]
+
+# Generate feature
+# Generate feature test case
