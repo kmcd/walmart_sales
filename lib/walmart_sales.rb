@@ -1,8 +1,10 @@
 require 'active_record'
+require 'statsample'
 
 ActiveRecord::Base.establish_connection adapter:'postgresql',
   database:'walmart_sales', host:'localhost'
 
+require_relative 'partition'
 require_relative 'feature'
 require_relative 'knn'
 require_relative 'linear'

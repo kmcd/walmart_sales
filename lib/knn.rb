@@ -1,26 +1,29 @@
 class KNN
   attr_reader :examples, :neighbours
   
-  def initialize(examples=[], neighbours=4)
-    @examples, @neighbours = examples.clone, neighbours
+  def initialize(examples, neighbours=4)
+    @examples, @neighbours = examples, neighbours
   end
   
-  def sales
+  def weekly_sales(predict)
+    distances(predict).
+      take(neighbours).
+      map(&:last).
+      to_scale.mean
   end
   
   private
   
-  def euclidean_distance(trades, example)
-    trades.zip(example).
-      map {|p1,p2| (p1 - p2) ** 2 }.compact.
+  def distances(predict)
+    examples. # TODO: use a Neighbour OpenStruct
+      map {|_| [ euclidean_distance(predict), _.weekly_sales ] }.
+      sort_by &:first
+  end
+  
+  def euclidean_distance(predict)
+    examples.
+      map {|_| (_.data - predict.data) ** 2 }.
+      compact.
       reduce(:+) ** 0.5
-  end
-  
-  def gaussian_weight(distance,sigma=10.0)
-    Math::E ** ( -distance**2 / ( 2 * sigma**2 ) )
-  end
-  
-  def inverse_weight(distance)
-    (1.0 / ( distance + 0.1 )) / 10
   end
 end

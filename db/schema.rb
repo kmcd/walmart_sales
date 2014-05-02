@@ -37,4 +37,9 @@ ActiveRecord::Schema.define(version: 1) do
     t.string  'type'
     t.integer 'size'
   end
+  
+  create_table 'partitions', force: true do |t|
+    t.string 'name'
+    t.string 'training_ids', array:true
+  end
 end

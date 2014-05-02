@@ -23,11 +23,10 @@ Rake::TestTask.new(:test) do |test|
 end
 
 
-task :blend => :test do
+task :blend => :test do                                                     
   puts 'Blending'
 end
 
-# TODO: create in db instead - this doesn't belong in source repo
 task :partition do
   require_relative 'lib/walmart_sales'
   examples, number_of_partitions = Train.count, 5
@@ -37,7 +36,9 @@ task :partition do
     each_slice(examples/number_of_partitions).
     map {|_| _ }
   
-  vault = { validation: partitions.last, training:partitions[0..-2] }
-  
-  File.open('./data/vault.yml', 'w') {|_| _.write vault.to_yaml }
+  Partition.create name:'disposable',       training_ids:partitions.first.to_s
+  Partition.create name:'train_1',          training_ids:partitions[1].to_s
+  Partition.create name:'train_2',          training_ids:partitions[2].to_s
+  Partition.create name:'train_3',          training_ids:partitions[3].to_s
+  Partition.create name:'cross_validation', training_ids:partitions.last.to_s
 end
